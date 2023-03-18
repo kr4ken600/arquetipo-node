@@ -1,0 +1,240 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "User API",
+    "version": "1.0.0",
+    "description": "Microservice User API"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:9100"
+    }
+  ],
+  "apis": [
+    "C:\\Users\\Usuario\\Documents\\Cap Arquetipo Node\\user-service\\src\\**\\**\\*.ts"
+  ],
+  "paths": {
+    "/roles": {
+      "post": {
+        "description": "create one user",
+        "tags": [
+          "Roles"
+        ],
+        "requestBody": {
+          "description": "object user",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleTo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "All Users",
+            "content": {
+              "appication/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleTo"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error bad parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorTo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/": {
+      "get": {
+        "description": "Get all Users",
+        "tags": [
+          "Users"
+        ],
+        "responses": {
+          "200": {
+            "description": "All Users",
+            "content": {
+              "appication/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserTo"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error bad parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorTo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "post": {
+        "description": "create one user",
+        "tags": [
+          "Users"
+        ],
+        "requestBody": {
+          "description": "object user",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserTo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "All Users",
+            "content": {
+              "appication/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserTo"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error bad parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorTo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}/id": {
+      "delete": {
+        "description": "create Users",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number",
+              "example": 1
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All Users"
+          },
+          "400": {
+            "description": "Error bad parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorTo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ping/": {
+      "get": {
+        "description": "Test service",
+        "tags": [
+          "Ping"
+        ],
+        "responses": {
+          "200": {
+            "description": "Pong",
+            "content": {
+              "appication/json": {
+                "example": {
+                  "status": 200,
+                  "message": "pong"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ErrorTo": {
+        "type": "object",
+        "properties": {
+          "errorCode": {
+            "type": "string",
+            "description": "Código de error de negocio",
+            "example": 10
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "Error de sistema",
+            "example": "Null pointer"
+          },
+          "userError": {
+            "type": "string",
+            "description": "Human readable error",
+            "example": "No se encontró información"
+          },
+          "info": {
+            "type": "string",
+            "description": "Información sobre solución del error",
+            "example": "http://info.com"
+          }
+        }
+      },
+      "RoleTo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "type of role",
+            "example": "admin"
+          }
+        }
+      },
+      "UserTo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "name of user",
+            "example": "Yonatan"
+          },
+          "email": {
+            "type": "string",
+            "description": "email of user",
+            "example": "yonatan@axity.com"
+          }
+        }
+      }
+    }
+  },
+  "tags": []
+}
