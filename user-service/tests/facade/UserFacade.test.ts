@@ -18,7 +18,7 @@ describe('UserFacade Test', () => {
         });
     });
 
-    before('FindAll', () => {
+    describe('FindAll', () => {
        it('should return one user', async () => {
             const user: any[] = await UserFacade.findAll();
             expect(1).equal(user.length);
@@ -82,13 +82,13 @@ describe('UserFacade Test', () => {
     
     describe('Update', () => {
         it('should return user', async () => {
-            let id = 2;
+            let id = 1;
             let userTo:UserTo = {
                 name: "Ortiz",
                 email: "yonatan@axity.com"
             };
-            let user:boolean = await UserFacade.update(id,userTo);
-            expect(user).equal(true);
+            let user:UserTo = await UserFacade.update(id,userTo);
+            expect(user.name).equal('Ortiz');
         });
     });
 

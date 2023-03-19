@@ -61,26 +61,28 @@ const UserService: IUserService = {
      * @memberof UserFacade
      */
     async deleteU(id: number): Promise<boolean> {
-        let res:number = await User.destroy({ where: { id: id } });
-        
-        if(!res){
+        let res: number = await User.destroy({ where: { id: id } });
+
+        if (!res) {
             throw new ParametersError("El usuario no existe");
         }
         return !!res;
     },
 
     /**
-     * @returns {Promise < boolean >}
+     * @returns {Promise < UserTo >}
      * @memberof UserFacade
      */
-    async update(id:number, user: UserTo): Promise<boolean> {
-        const [n, userModel] = await User.update(user, { where: { id: id }  });
-
-        if(n <= 0){
+    async update(id: number, user: UserTo): Promise<UserTo> {
+        const [rows, userModel] = await User.update(user, { where: { id: id }  });
+        
+        if(rows <= 0){
             throw new ParametersError("El usuario no existe");
         }
 
-        return true;
+        const userTo:UserTo[] = await User.findAll({where: {id: id}})
+
+        return userTo[0];
     },
 }
 

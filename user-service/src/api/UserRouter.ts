@@ -91,7 +91,11 @@ router.post('', UserFacade.save);
  *                  $ref: '#/components/schemas/UserTo'
  *    responses:
  *      200:
- *        description: All Users
+ *        description: object user
+ *        content:
+ *          appication/json:
+ *            schema:
+ *              $ref: '#/components/schemas/UserTo'
  *      400:
  *        description: Error bad parameters
  *        content:
@@ -99,7 +103,7 @@ router.post('', UserFacade.save);
  *            schema:
  *              $ref: '#/components/schemas/ErrorTo'
  */
-router.delete('/:id/id', UserFacade.update);
+router.put('/:id/id', UserFacade.update);
 
 /**
  * DELETE method route

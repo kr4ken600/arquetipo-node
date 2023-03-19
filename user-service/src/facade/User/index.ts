@@ -77,8 +77,8 @@ export async function update(req: Request, res: Response, next: NextFunction): P
         let user: UserTo = {...req.body};
 
         logger.info("(%s) - Request put: %s","UserRouter.ts", JSON.stringify(user));
-        await UserFacade.update(Number(id),user);
-        res.status(HttpStatusCode.OK).json("");
+        user = await UserFacade.update(Number(id),user);
+        res.status(HttpStatusCode.OK).json(user);
     } catch (error) {
         next(error);
     }

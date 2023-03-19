@@ -44,10 +44,10 @@ const UserFacade: IUserFacade = {
         return await UserService.deleteU(id);
     },
     /**
-     * @returns {Promise < boolean >}
+     * @returns {Promise < UserTo >}
      * @memberof UserFacade
      */
-    async update(id:number, user: UserTo): Promise<boolean> {
+    async update(id:number, user: UserTo): Promise<UserTo> {
         return await UserService.update(id, user);
     },
 }

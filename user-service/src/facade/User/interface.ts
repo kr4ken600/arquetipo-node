@@ -27,8 +27,8 @@ export interface IUserFacade {
      */
     consumer(id: number): Promise<boolean>;
     /**
-     * @returns {Promise<boolean>}
+     * @returns {Promise<UserTo>}
      * @memberof IUserFacade
      */
-    update(id:number, user: UserTo): Promise<boolean>;
+    update(id:number, user: UserTo): Promise<UserTo>;
 }

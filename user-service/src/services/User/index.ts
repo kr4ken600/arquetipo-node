@@ -43,8 +43,8 @@ export async function deleteU(id: number): Promise<boolean> {
 
 /**
  * @export
- * @returns {Promise < boolean >}
+ * @returns {Promise < UserTo >}
  */
-export async function update(id: number, user: UserTo): Promise<boolean> {
+export async function update(id: number, user: UserTo): Promise<UserTo> {
     return await UserService.update(id, user);
 }

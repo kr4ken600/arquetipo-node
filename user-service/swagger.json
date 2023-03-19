@@ -127,6 +127,56 @@
       }
     },
     "/users/{id}/id": {
+      "put": {
+        "description": "create Users",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number",
+              "example": 1
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "object user",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserTo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "object user",
+            "content": {
+              "appication/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserTo"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error bad parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorTo"
+                }
+              }
+            }
+          }
+        }
+      },
       "delete": {
         "description": "create Users",
         "tags": [
@@ -153,27 +203,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorTo"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/ping/": {
-      "get": {
-        "description": "Test service",
-        "tags": [
-          "Ping"
-        ],
-        "responses": {
-          "200": {
-            "description": "Pong",
-            "content": {
-              "appication/json": {
-                "example": {
-                  "status": 200,
-                  "message": "pong"
                 }
               }
             }
