@@ -3,8 +3,6 @@ process.env.NODE_ENV = 'test'
 import { expect } from "chai";
 import RoleFacade from '../../src/facade/Roles/facade';
 import { db } from '../../src/config/connection/database';
-import Role from "../../src/models/Role.model";
-import * as Kafka from "../../src/config/stream/kafka";
 import { RoleTo } from "../../src/to/RoleTo";
 import { ParametersError } from "../../src/config/error";
 

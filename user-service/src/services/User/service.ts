@@ -1,8 +1,8 @@
 import { IUserService } from "./interface";
 import User from "../../models/User.model";
-import * as Kafka from "../../config/stream/kafka"
 import { UserTo } from "../../to/UserTo";
 import { ParametersError } from "../../config/error";
+import { update } from "lodash";
 
 /**
  * @export
@@ -57,12 +57,31 @@ const UserService: IUserService = {
     },
 
     /**
-     * @returns {Promise < UserTo >}
+     * @returns {Promise < boolean >}
      * @memberof UserFacade
      */
-    async deleteU(id: number): Promise<void> {
-        await User.destroy({ where: { id: id } });
-    }
+    async deleteU(id: number): Promise<boolean> {
+        let res:number = await User.destroy({ where: { id: id } });
+        
+        if(!res){
+            throw new ParametersError("El usuario no existe");
+        }
+        return !!res;
+    },
+
+    /**
+     * @returns {Promise < boolean >}
+     * @memberof UserFacade
+     */
+    async update(id:number, user: UserTo): Promise<boolean> {
+        const [n, userModel] = await User.update(user, { where: { id: id }  });
+
+        if(n <= 0){
+            throw new ParametersError("El usuario no existe");
+        }
+
+        return true;
+    },
 }
 
 export default UserService;

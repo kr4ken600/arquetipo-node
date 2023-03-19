@@ -35,8 +35,16 @@ export async function create(user: UserTo): Promise<UserTo> {
 
 /**
  * @export
- * @returns {Promise < any[] >}
+ * @returns {Promise < boolean >}
  */
-export async function deleteU(id: number): Promise<void> {
+export async function deleteU(id: number): Promise<boolean> {
     return await UserService.deleteU(id);
+}
+
+/**
+ * @export
+ * @returns {Promise < boolean >}
+ */
+export async function update(id: number, user: UserTo): Promise<boolean> {
+    return await UserService.update(id, user);
 }

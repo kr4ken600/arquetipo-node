@@ -25,5 +25,10 @@ export interface IUserFacade {
      * @returns {Promise<void>}
      * @memberof IUserFacade
      */
-    consumer(id: number): Promise<void>;
+    consumer(id: number): Promise<boolean>;
+    /**
+     * @returns {Promise<boolean>}
+     * @memberof IUserFacade
+     */
+    update(id:number, user: UserTo): Promise<boolean>;
 }

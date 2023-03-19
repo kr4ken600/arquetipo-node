@@ -15,7 +15,6 @@ const UserFacade: IUserFacade = {
      * @memberof UserFacade
      */
     async findAll(): Promise<any[]> {
-
         let User = await UserService.findAll();
         return User;
     },
@@ -38,12 +37,19 @@ const UserFacade: IUserFacade = {
         await Kafka.send('user-service-topic', `${id}`);        
     },
     /**
-     * @returns {Promise < UserTo >}
+     * @returns {Promise < boolean >}
      * @memberof UserFacade
      */
-    async consumer(id: number): Promise<void> {
-        await UserService.deleteU(id);     
-    }
+    async consumer(id: number): Promise<boolean> {
+        return await UserService.deleteU(id);
+    },
+    /**
+     * @returns {Promise < boolean >}
+     * @memberof UserFacade
+     */
+    async update(id:number, user: UserTo): Promise<boolean> {
+        return await UserService.update(id, user);
+    },
 }
 
 export default UserFacade;

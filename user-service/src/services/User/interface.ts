@@ -32,8 +32,14 @@ export interface IUserService {
     create(user: UserTo): Promise<UserTo>;
 
     /**
-     * @returns {Promise<void>}
+     * @returns {Promise<boolean>}
      * @memberof IUserService
      */
-    deleteU(id: number): Promise<void>;
+    deleteU(id: number): Promise<boolean>;
+
+    /**
+     * @returns {Promise<boolean>}
+     * @memberof IUserService
+     */
+    update(id:number, user: UserTo): Promise<boolean>;
 }

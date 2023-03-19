@@ -59,3 +59,27 @@ export async function publish(req: Request, res: Response, next: NextFunction): 
         next(error);
     }
 }
+
+/**
+ * @export
+ * @param {Request} req
+ * @param {Response} res
+ * @param {NextFunction} next
+ * @returns {Promise < void >}
+ */
+export async function update(req: Request, res: Response, next: NextFunction): Promise < void > {
+    try {
+
+        const {
+            params: { id }
+        } = req;
+
+        let user: UserTo = {...req.body};
+
+        logger.info("(%s) - Request put: %s","UserRouter.ts", JSON.stringify(user));
+        await UserFacade.update(Number(id),user);
+        res.status(HttpStatusCode.OK).json("");
+    } catch (error) {
+        next(error);
+    }
+}
