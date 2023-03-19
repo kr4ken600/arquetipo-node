@@ -11,7 +11,7 @@ const router: Router = Router();
  * GET method route
  * @example http://localhost:PORT/users
  * @swagger
- * /users/:
+ * /users:
  *  get:
  *    description: Get all Users
  *    tags: ["Users"]
@@ -67,7 +67,7 @@ router.post('', UserFacade.save);
  * PUT method route
  * @example http://localhost:PORT/users
  * @swagger
- * /users/{id}/id:
+ * /users/{id}:
  *  put:
  *    description: create Users
  *    tags: ["Users"]
@@ -103,13 +103,13 @@ router.post('', UserFacade.save);
  *            schema:
  *              $ref: '#/components/schemas/ErrorTo'
  */
-router.put('/:id/id', UserFacade.update);
+router.put('/:id', UserFacade.update);
 
 /**
  * DELETE method route
  * @example http://localhost:PORT/users
  * @swagger
- * /users/{id}/id:
+ * /users/{id}:
  *  delete:
  *    description: create Users
  *    tags: ["Users"]
@@ -134,7 +134,7 @@ router.put('/:id/id', UserFacade.update);
  *            schema:
  *              $ref: '#/components/schemas/ErrorTo'
  */
-router.delete('/:id/id', UserFacade.publish);
+router.delete('/:id', UserFacade.publish);
 
 /**
  * @export {express.Router}

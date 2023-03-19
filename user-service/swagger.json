@@ -15,6 +15,34 @@
   ],
   "paths": {
     "/roles": {
+      "get": {
+        "description": "Get all Roles",
+        "tags": [
+          "Roles"
+        ],
+        "responses": {
+          "200": {
+            "description": "All Roles",
+            "content": {
+              "appication/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleTo"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error bad parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorTo"
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "description": "create one user",
         "tags": [
@@ -33,7 +61,7 @@
         },
         "responses": {
           "200": {
-            "description": "All Users",
+            "description": "All Roles",
             "content": {
               "appication/json": {
                 "schema": {
@@ -55,7 +83,91 @@
         }
       }
     },
-    "/users/": {
+    "/roles/{id}": {
+      "put": {
+        "description": "create Roles",
+        "tags": [
+          "Roles"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number",
+              "example": 1
+            },
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "description": "object role",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleTo"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "object role",
+            "content": {
+              "appication/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleTo"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error bad parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorTo"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "create Roles",
+        "tags": [
+          "Roles"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "number",
+              "example": 1
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All Roles"
+          },
+          "400": {
+            "description": "Error bad parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorTo"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users": {
       "get": {
         "description": "Get all Users",
         "tags": [
@@ -83,9 +195,7 @@
             }
           }
         }
-      }
-    },
-    "/users": {
+      },
       "post": {
         "description": "create one user",
         "tags": [
@@ -126,7 +236,7 @@
         }
       }
     },
-    "/users/{id}/id": {
+    "/users/{id}": {
       "put": {
         "description": "create Users",
         "tags": [

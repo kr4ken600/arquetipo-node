@@ -1,6 +1,7 @@
 import { IRoleService } from "./interface";
 import Role from "../../models/Role.model";
 import { RoleTo } from "../../to/RoleTo";
+import { ParametersError } from "../../config/error";
 
 /**
  * @export
@@ -8,13 +9,50 @@ import { RoleTo } from "../../to/RoleTo";
  */
 const RoleService: IRoleService = {
     /**
+     * @returns {Promise < any[] >}
+     * @memberof RoleFacade
+     */
+    async findAll(): Promise<any[]> {
+        // Para enviar un mensaje a kafka
+        // await Kafka.send("test", 'Hello');
+        return Role.findAll();
+    },
+    /**
      * @returns {Promise < RoleTo >}
-     * @memberof UserFacade
+     * @memberof RoleFacade
      */
     async create(role: RoleTo): Promise<RoleTo> {
         let roleModel = await Role.create(role);
         return roleModel;
-    }
+    },
+    /**
+     * @returns {Promise < boolean >}
+     * @memberof RoleFacade
+     */
+    async deleteR(id: number): Promise<boolean> {
+        let res: number = await Role.destroy({ where: { id: id } });
+
+        if (!res) {
+            throw new ParametersError("El rol no existe");
+        }
+        return !!res;
+    },
+
+    /**
+     * @returns {Promise < RoleTo >}
+     * @memberof RoleFacade
+     */
+    async update(id: number, user: RoleTo): Promise<RoleTo> {
+        const [rows, userModel] = await Role.update(user, { where: { id: id }  });
+        
+        if(rows <= 0){
+            throw new ParametersError("El rol no existe");
+        }
+
+        const RoleTo:RoleTo[] = await Role.findAll({where: {id: id}})
+
+        return RoleTo[0];
+    },
 }
 
 export default RoleService;
