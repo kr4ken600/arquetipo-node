@@ -2,7 +2,6 @@ import { IUserService } from "./interface";
 import User from "../../models/User.model";
 import { UserTo } from "../../to/UserTo";
 import { ParametersError } from "../../config/error";
-import { update } from "lodash";
 
 /**
  * @export
@@ -61,12 +60,16 @@ const UserService: IUserService = {
      * @memberof UserFacade
      */
     async deleteU(id: number): Promise<boolean> {
-        let res: number = await User.destroy({ where: { id: id } });
-
-        if (!res) {
-            throw new ParametersError("El usuario no existe");
-        }
-        return !!res;
+        let res: boolean = false;
+        await User.destroy({ where: { id: id } })
+            .then((data) => {
+                if (data < 1) {
+                    throw new ParametersError("El usuario no existe");        
+                }
+                res = true;
+            });
+            
+        return res;
     },
 
     /**

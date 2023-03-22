@@ -30,12 +30,17 @@ const RoleService: IRoleService = {
      * @memberof RoleFacade
      */
     async deleteR(id: number): Promise<boolean> {
-        let res: number = await Role.destroy({ where: { id: id } });
+        let res: boolean = false;
+        await Role.destroy({ where: { id: id } })
+            .then((data) => {
+                if(data < 1){
+                    throw new ParametersError("El rol no existe");
+                }
 
-        if (!res) {
-            throw new ParametersError("El rol no existe");
-        }
-        return !!res;
+                res = true
+            });
+
+        return res;
     },
 
     /**
